@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardElevation="4dp"
+        card_view:cardCornerRadius="3dp"
+        tools:context=".MenuActivity">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:padding="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/tvAppointmentId"
+                  tools:text="Cita médica #7"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:gravity="center_horizontal"
+                  style="@style/Base.TextAppearance.AppCompat.Medium"
+                  android:id="@+id/tvDoctorName"
+                  tools:text="Médico Test"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:gravity="center_horizontal"
+                  android:id="@+id/tvScheduledDate"
+                  tools:text="Atención el día 12/12/2018"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:gravity="center_horizontal"
+                  android:id="@+id/tvScheduledTime"
+                  tools:text="A las 3:00 PM"/>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
