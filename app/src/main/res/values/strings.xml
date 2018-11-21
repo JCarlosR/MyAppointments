@@ -40,4 +40,5 @@
     </string>
     <string name="dialog_create_appointment_exit_positive_btn">Sí, salir</string>
     <string name="dialog_create_appointment_exit_negative_btn">Continuar registro</string>
+    <string name="validate_appointment_description">La descripción es demasiado corta</string>
 </resources>
