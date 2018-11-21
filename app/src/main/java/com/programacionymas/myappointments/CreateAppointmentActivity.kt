@@ -3,6 +3,7 @@ package com.programacionymas.myappointments
 import android.app.DatePickerDialog
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.RadioButton
@@ -105,4 +106,19 @@ class CreateAppointmentActivity : AppCompatActivity() {
 
     private fun Int.twoDigits()
             = if (this>=10) this.toString() else "0$this"
+
+    override fun onBackPressed() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(getString(R.string.dialog_create_appointment_exit_title))
+        builder.setMessage(getString(R.string.dialog_create_appointment_exit_message))
+        builder.setPositiveButton(getString(R.string.dialog_create_appointment_exit_positive_btn)) { _, _ ->
+            finish()
+        }
+        builder.setNegativeButton(getString(R.string.dialog_create_appointment_exit_negative_btn)) { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        val dialog = builder.create()
+        dialog.show()
+    }
 }
