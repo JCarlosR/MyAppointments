@@ -2,12 +2,14 @@ package com.programacionymas.myappointments
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.RadioButton
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_create_appointment.*
 import kotlinx.android.synthetic.main.card_view_step_one.*
 import kotlinx.android.synthetic.main.card_view_step_three.*
 import kotlinx.android.synthetic.main.card_view_step_two.*
@@ -16,7 +18,7 @@ import java.util.*
 class CreateAppointmentActivity : AppCompatActivity() {
 
     private val selectedCalendar = Calendar.getInstance()
-    private var selectedRadioButton: RadioButton? = null
+    private var selectedTimeRadioBtn: RadioButton? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,10 +35,20 @@ class CreateAppointmentActivity : AppCompatActivity() {
         }
 
         btnNext2.setOnClickListener {
-            showAppointmentDataToConfirm()
-            // continue to step 3
-            cvStep2.visibility = View.GONE
-            cvStep3.visibility = View.VISIBLE
+            when {
+                etScheduledDate.text.toString().isEmpty() ->
+                    etScheduledDate.error = getString(R.string.validate_appointment_date)
+
+                selectedTimeRadioBtn == null ->
+                    Snackbar.make(createAppointmentLinearLayout, R.string.validate_appointment_time, Snackbar.LENGTH_SHORT).show()
+
+                else -> {
+                    // continue to step 3
+                    showAppointmentDataToConfirm()
+                    cvStep2.visibility = View.GONE
+                    cvStep3.visibility = View.VISIBLE
+                }
+            }
         }
 
         btnConfirmAppointment.setOnClickListener {
@@ -62,7 +74,7 @@ class CreateAppointmentActivity : AppCompatActivity() {
 
         tvConfirmDoctorName.text = spinnerDoctors.selectedItem.toString()
         tvConfirmDate.text = etScheduledDate.text.toString()
-        tvConfirmTime.text = selectedRadioButton?.text.toString()
+        tvConfirmTime.text = selectedTimeRadioBtn?.text.toString()
     }
 
     fun onClickScheduledDate(v: View?) {
@@ -81,6 +93,7 @@ class CreateAppointmentActivity : AppCompatActivity() {
                     d.twoDigits()
                 )
             )
+            etScheduledDate.error = null
             displayRadioButtons()
         }
 
@@ -103,7 +116,7 @@ class CreateAppointmentActivity : AppCompatActivity() {
 //        radioGroup.clearCheck()
 //        radioGroup.removeAllViews()
 //        radioGroup.checkedRadioButtonId
-        selectedRadioButton = null
+        selectedTimeRadioBtn = null
         radioGroupLeft.removeAllViews()
         radioGroupRight.removeAllViews()
 
@@ -116,10 +129,10 @@ class CreateAppointmentActivity : AppCompatActivity() {
             radioButton.text = it
 
             radioButton.setOnClickListener { view ->
-                selectedRadioButton?.isChecked = false
+                selectedTimeRadioBtn?.isChecked = false
 
-                selectedRadioButton = view as RadioButton?
-                selectedRadioButton?.isChecked = true
+                selectedTimeRadioBtn = view as RadioButton?
+                selectedTimeRadioBtn?.isChecked = true
             }
 
             if (goToLeft)
@@ -128,8 +141,6 @@ class CreateAppointmentActivity : AppCompatActivity() {
                 radioGroupRight.addView(radioButton)
             goToLeft = !goToLeft
         }
-
-
     }
 
     private fun Int.twoDigits()
