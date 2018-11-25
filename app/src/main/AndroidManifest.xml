@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools" package="com.programacionymas.myappointments">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -9,24 +11,24 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme" tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity" android:launchMode="singleInstance">
+        <activity android:name=".ui.MainActivity" android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" android:launchMode="singleInstance">
+        <activity android:name=".ui.RegisterActivity" android:launchMode="singleInstance">
         </activity>
-        <activity android:name=".MenuActivity">
-        </activity>
-        <activity
-                android:name=".CreateAppointmentActivity"
-                android:parentActivityName=".MenuActivity">
+        <activity android:name=".ui.MenuActivity">
         </activity>
         <activity
-                android:name=".AppointmentsActivity"
-                android:parentActivityName=".MenuActivity">
+                android:name=".ui.CreateAppointmentActivity"
+                android:parentActivityName=".ui.MenuActivity">
+        </activity>
+        <activity
+                android:name=".ui.AppointmentsActivity"
+                android:parentActivityName=".ui.MenuActivity">
         </activity>
     </application>
 

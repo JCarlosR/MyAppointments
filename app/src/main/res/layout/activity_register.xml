@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
 
         android:orientation="vertical"
-        tools:context=".RegisterActivity">
+        tools:context=".ui.RegisterActivity">
 
     <TextView
             android:paddingTop="12dp"

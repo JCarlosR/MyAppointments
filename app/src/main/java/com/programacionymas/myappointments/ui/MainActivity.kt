@@ -1,12 +1,14 @@
-package com.programacionymas.myappointments
+package com.programacionymas.myappointments.ui
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
+import com.programacionymas.myappointments.PreferenceHelper
 import com.programacionymas.myappointments.PreferenceHelper.get
 import com.programacionymas.myappointments.PreferenceHelper.set
+import com.programacionymas.myappointments.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

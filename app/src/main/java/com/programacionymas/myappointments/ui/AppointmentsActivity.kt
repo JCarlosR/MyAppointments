@@ -1,8 +1,9 @@
-package com.programacionymas.myappointments
+package com.programacionymas.myappointments.ui
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import com.programacionymas.myappointments.R
 import com.programacionymas.myappointments.model.Appointment
 import kotlinx.android.synthetic.main.activity_appointments.*
 

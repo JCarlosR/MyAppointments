@@ -8,7 +8,7 @@
         android:orientation="vertical"
         android:gravity="center"
         android:padding="16dp"
-        tools:context=".MenuActivity">
+        tools:context=".ui.MenuActivity">
 
     <TextView
             android:paddingTop="12dp"

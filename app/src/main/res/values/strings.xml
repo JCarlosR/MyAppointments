@@ -45,4 +45,5 @@
     <string name="label_confirm_appointment_data">Datos de la cita</string>
     <string name="validate_appointment_date">Es necesario seleccionar una fecha</string>
     <string name="validate_appointment_time">Es necesario definir una hora para la cita</string>
+    <string name="error_loading_specialties">Ocurrió un problema al cargar las especialidades</string>
 </resources>

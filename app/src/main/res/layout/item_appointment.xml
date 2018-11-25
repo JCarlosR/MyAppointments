@@ -11,7 +11,7 @@
         card_view:cardUseCompatPadding="true"
         card_view:cardElevation="4dp"
         card_view:cardCornerRadius="3dp"
-        tools:context=".MenuActivity">
+        tools:context=".ui.MenuActivity">
 
     <LinearLayout
             android:orientation="vertical"
