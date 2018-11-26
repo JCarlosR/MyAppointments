@@ -48,4 +48,9 @@
     <string name="error_loading_specialties">Ocurrió un problema al cargar las especialidades</string>
     <string name="error_loading_doctors">Ocurrió un problema al cargar los médicos</string>
     <string name="error_loading_hours">No se han podido cargar las horas</string>
+    <string name="label_select_doctor_and_date">Seleccione un médico y una fecha, para ver sus horas disponibles.
+    </string>
+    <string name="label_not_available_hours">No se encontraron horas disponibles para el médico en el día
+        seleccionado.
+    </string>
 </resources>
