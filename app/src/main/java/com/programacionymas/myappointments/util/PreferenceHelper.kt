@@ -1,4 +1,4 @@
-package com.programacionymas.myappointments
+package com.programacionymas.myappointments.util
 
 import android.content.Context
 import android.content.SharedPreferences

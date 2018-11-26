@@ -1,17 +1,15 @@
 package com.programacionymas.myappointments.io
 
+import com.programacionymas.myappointments.io.response.LoginResponse
 import com.programacionymas.myappointments.model.Doctor
 import com.programacionymas.myappointments.model.Schedule
 import com.programacionymas.myappointments.model.Specialty
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-
+import retrofit2.http.*
 
 
 interface ApiService {
@@ -25,6 +23,13 @@ interface ApiService {
     @GET("schedule/hours")
     fun getHours(@Query("doctor_id") doctorId: Int, @Query("date") date: String):
             Call<Schedule>
+
+    @POST("login")
+    fun postLogin(@Query("email") email: String, @Query("password") password: String):
+            Call<LoginResponse>
+
+    @POST("logout")
+    fun postLogout(@Header("Authorization") authHeader: String): Call<Void>
 
     companion object Factory {
         private const val BASE_URL = "http://209.97.158.34/api/"
