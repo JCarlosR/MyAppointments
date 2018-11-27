@@ -1,6 +1,7 @@
 package com.programacionymas.myappointments.io
 
 import com.programacionymas.myappointments.io.response.LoginResponse
+import com.programacionymas.myappointments.io.response.SimpleResponse
 import com.programacionymas.myappointments.model.Appointment
 import com.programacionymas.myappointments.model.Doctor
 import com.programacionymas.myappointments.model.Schedule
@@ -35,6 +36,18 @@ interface ApiService {
     @GET("appointments")
     fun getAppointments(@Header("Authorization") authHeader: String):
             Call<ArrayList<Appointment>>
+
+    @POST("appointments")
+    @Headers("Accept: application/json")
+    fun storeAppointment(
+        @Header("Authorization") authHeader: String,
+        @Query("description") description: String,
+        @Query("specialty_id") specialtyId: Int,
+        @Query("doctor_id") doctorId: Int,
+        @Query("scheduled_date") scheduledDate: String,
+        @Query("scheduled_time") scheduledTime: String,
+        @Query("type") type: String
+    ): Call<SimpleResponse>
 
     companion object Factory {
         private const val BASE_URL = "http://209.97.158.34/api/"

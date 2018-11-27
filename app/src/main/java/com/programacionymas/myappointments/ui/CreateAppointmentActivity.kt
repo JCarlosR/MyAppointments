@@ -14,9 +14,13 @@ import android.widget.RadioButton
 import android.widget.Toast
 import com.programacionymas.myappointments.R
 import com.programacionymas.myappointments.io.ApiService
+import com.programacionymas.myappointments.io.response.SimpleResponse
 import com.programacionymas.myappointments.model.Doctor
 import com.programacionymas.myappointments.model.Schedule
 import com.programacionymas.myappointments.model.Specialty
+import com.programacionymas.myappointments.util.PreferenceHelper
+import com.programacionymas.myappointments.util.PreferenceHelper.get
+import com.programacionymas.myappointments.util.toast
 import kotlinx.android.synthetic.main.activity_create_appointment.*
 import kotlinx.android.synthetic.main.card_view_step_one.*
 import kotlinx.android.synthetic.main.card_view_step_three.*
@@ -31,6 +35,10 @@ class CreateAppointmentActivity : AppCompatActivity() {
 
     private val apiService: ApiService by lazy {
         ApiService.create()
+    }
+
+    private val preferences by lazy {
+        PreferenceHelper.defaultPrefs(this)
     }
 
     private val selectedCalendar = Calendar.getInstance()
@@ -69,13 +77,50 @@ class CreateAppointmentActivity : AppCompatActivity() {
         }
 
         btnConfirmAppointment.setOnClickListener {
-            Toast.makeText(this, "Cita registrada correctamente", Toast.LENGTH_SHORT).show()
-            finish()
+            performStoreAppointment()
         }
 
         loadSpecialties()
         listenSpecialtyChanges()
         listenDoctorAndDateChanges()
+    }
+
+    private fun performStoreAppointment() {
+        btnConfirmAppointment.isClickable = false
+
+        val jwt = preferences["jwt", ""]
+        val authHeader = "Bearer $jwt"
+        val description = tvConfirmDescription.text.toString()
+        val specialty = spinnerSpecialties.selectedItem as Specialty
+        val doctor = spinnerDoctors.selectedItem as Doctor
+        val scheduledDate = tvConfirmDate.text.toString()
+        val scheduledTime = tvConfirmTime.text.toString()
+        val type = tvConfirmType.text.toString()
+
+        val call = apiService.storeAppointment(
+            authHeader, description,
+            specialty.id, doctor.id,
+            scheduledDate, scheduledTime,
+            type
+        )
+        call.enqueue(object: Callback<SimpleResponse> {
+            override fun onFailure(call: Call<SimpleResponse>, t: Throwable) {
+                toast(t.localizedMessage)
+                btnConfirmAppointment.isClickable = true
+            }
+
+            override fun onResponse(call: Call<SimpleResponse>, response: Response<SimpleResponse>) {
+                if (response.isSuccessful) {
+                    toast(getString(R.string.create_appointment_success))
+                    finish()
+                } else {
+                    toast(getString(R.string.create_appointment_error))
+                    btnConfirmAppointment.isClickable = true
+                }
+            }
+        })
+
+
     }
 
     private fun listenDoctorAndDateChanges() {
