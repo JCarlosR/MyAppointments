@@ -1,5 +1,7 @@
 package com.programacionymas.myappointments.ui
 
+import android.support.transition.AutoTransition
+import android.support.transition.TransitionManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +30,8 @@ class AppointmentAdapter
             tvCreatedAt.text = context.getString(R.string.item_appointment_created_at, appointment.createdAt)
 
             ibExpand.setOnClickListener {
+                TransitionManager.beginDelayedTransition(parent as ViewGroup, AutoTransition())
+
                 if (linearLayoutDetails.visibility == View.VISIBLE) {
                     linearLayoutDetails.visibility = View.GONE
                     ibExpand.setImageResource(R.drawable.ic_expand_more)
