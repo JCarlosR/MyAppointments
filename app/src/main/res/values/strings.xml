@@ -60,4 +60,8 @@
     <string name="item_appointment_created_at">Esta cita se registró el día %1$s con la siguiente descripción:</string>
     <string name="create_appointment_success">Cita registrada correctamente</string>
     <string name="create_appointment_error">Ocurrió un error inesperado registrando la cita médica.</string>
+    <string name="label_password_confirmation">Confirmar clave</string>
+    <string name="error_register_empty_fields">Por favor completar todos los campos</string>
+    <string name="error_register_passwords_do_not_match">Las contraseñas no coinciden</string>
+    <string name="error_register_validation">Ocurrió un error en el registro</string>
 </resources>

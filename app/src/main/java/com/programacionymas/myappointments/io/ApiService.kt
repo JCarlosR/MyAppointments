@@ -49,6 +49,15 @@ interface ApiService {
         @Query("type") type: String
     ): Call<SimpleResponse>
 
+    @POST("register")
+    @Headers("Accept: application/json")
+    fun postRegister(
+        @Query("name") name: String,
+        @Query("email") email: String,
+        @Query("password") password: String,
+        @Query("password_confirmation") password_confirmation: String
+    ): Call<LoginResponse>
+
     companion object Factory {
         private const val BASE_URL = "http://209.97.158.34/api/"
 
