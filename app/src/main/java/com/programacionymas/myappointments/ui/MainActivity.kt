@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.widget.Toast
+import com.google.firebase.iid.FirebaseInstanceId
 import com.programacionymas.myappointments.util.PreferenceHelper
 import com.programacionymas.myappointments.util.PreferenceHelper.get
 import com.programacionymas.myappointments.util.PreferenceHelper.set
@@ -30,6 +32,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener(this) { instanceIdResult ->
+            val deviceToken = instanceIdResult.token
+            Log.d("FCMService", deviceToken)
+        }
 
         // shared preferences
         // SQLite

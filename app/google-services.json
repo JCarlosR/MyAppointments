@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "886811498816",
+    "firebase_url": "https://my-appointments-b1133.firebaseio.com",
+    "project_id": "my-appointments-b1133",
+    "storage_bucket": "my-appointments-b1133.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:886811498816:android:5a77d01508011cfb",
+        "android_client_info": {
+          "package_name": "com.programacionymas.myappointments"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "886811498816-93a0e4gsuiheeg9vn0to41s3l0s3neqk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsyRFwoboP_hin2KHsdOPuP9HoRBFEf3Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
