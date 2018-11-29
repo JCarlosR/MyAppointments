@@ -3,6 +3,8 @@ package com.programacionymas.myappointments.ui
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
+import com.google.firebase.iid.FirebaseInstanceId
 import com.programacionymas.myappointments.util.PreferenceHelper
 import com.programacionymas.myappointments.util.PreferenceHelper.set
 import com.programacionymas.myappointments.util.PreferenceHelper.get
@@ -28,6 +30,10 @@ class MenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
+        val storeToken = intent.getBooleanExtra("store_token", false)
+        if (storeToken)
+            storeToken()
+
         btnCreateAppointment.setOnClickListener {
             val intent = Intent(this, CreateAppointmentActivity::class.java)
             startActivity(intent)
@@ -40,6 +46,30 @@ class MenuActivity : AppCompatActivity() {
 
         btnLogout.setOnClickListener {
             performLogout()
+        }
+    }
+
+    private fun storeToken() {
+        val jwt = preferences["jwt", ""]
+        val authHeader = "Bearer $jwt"
+
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener(this) { instanceIdResult ->
+            val deviceToken = instanceIdResult.token
+
+            val call = apiService.postToken(authHeader, deviceToken)
+            call.enqueue(object: Callback<Void> {
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    toast(t.localizedMessage)
+                }
+
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    if (response.isSuccessful) {
+                        Log.d(TAG, "Token registrado correctamente")
+                    } else {
+                        Log.d(TAG, "Hubo un problema al registrar el token")
+                    }
+                }
+            })
         }
     }
 
@@ -63,5 +93,9 @@ class MenuActivity : AppCompatActivity() {
 
     private fun clearSessionPreference() {
         preferences["jwt"] = ""
+    }
+
+    companion object {
+        private const val TAG = "MenuActivity"
     }
 }

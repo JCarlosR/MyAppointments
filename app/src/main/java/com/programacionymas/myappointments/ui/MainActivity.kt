@@ -4,15 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.widget.Toast
-import com.google.firebase.iid.FirebaseInstanceId
-import com.programacionymas.myappointments.util.PreferenceHelper
-import com.programacionymas.myappointments.util.PreferenceHelper.get
-import com.programacionymas.myappointments.util.PreferenceHelper.set
 import com.programacionymas.myappointments.R
 import com.programacionymas.myappointments.io.ApiService
 import com.programacionymas.myappointments.io.response.LoginResponse
+import com.programacionymas.myappointments.util.PreferenceHelper
+import com.programacionymas.myappointments.util.PreferenceHelper.get
+import com.programacionymas.myappointments.util.PreferenceHelper.set
 import com.programacionymas.myappointments.util.toast
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
@@ -32,11 +30,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener(this) { instanceIdResult ->
-            val deviceToken = instanceIdResult.token
-            Log.d("FCMService", deviceToken)
-        }
 
         // shared preferences
         // SQLite
@@ -84,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                     if (loginResponse.success) {
                         createSessionPreference(loginResponse.jwt)
                         toast(getString(R.string.welcome_name, loginResponse.user.name))
-                        goToMenuActivity()
+                        goToMenuActivity(true)
                     } else {
                         toast(getString(R.string.error_invalid_credentials))
                     }
@@ -92,7 +85,6 @@ class MainActivity : AppCompatActivity() {
                     toast(getString(R.string.error_login_response))
                 }
             }
-
         })
     }
 
@@ -101,8 +93,13 @@ class MainActivity : AppCompatActivity() {
         preferences["jwt"] = jwt
     }
 
-    private fun goToMenuActivity() {
+    private fun goToMenuActivity(isUserInput: Boolean = false) {
         val intent = Intent(this, MenuActivity::class.java)
+
+        if (isUserInput) {
+            intent.putExtra("store_token", true)
+        }
+
         startActivity(intent)
         finish()
     }

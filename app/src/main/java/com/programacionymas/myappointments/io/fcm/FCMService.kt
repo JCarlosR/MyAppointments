@@ -12,10 +12,53 @@ import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.programacionymas.myappointments.R
+import com.programacionymas.myappointments.io.ApiService
 import com.programacionymas.myappointments.ui.MainActivity
+import com.programacionymas.myappointments.util.PreferenceHelper
+import com.programacionymas.myappointments.util.PreferenceHelper.get
+import com.programacionymas.myappointments.util.toast
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class FCMService : FirebaseMessagingService() {
+
+    private val apiService by lazy {
+        ApiService.create()
+    }
+
+    private val preferences by lazy {
+        PreferenceHelper.defaultPrefs(this)
+    }
+
+    override fun onNewToken(newToken: String?) {
+        super.onNewToken(newToken)
+
+        if (newToken == null)
+            return
+
+        val jwt = preferences["jwt", ""]
+        if (jwt.isEmpty())
+            return
+
+        val authHeader = "Bearer $jwt"
+
+        val call = apiService.postToken(authHeader, newToken)
+        call.enqueue(object: Callback<Void> {
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                toast(t.localizedMessage)
+            }
+
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    Log.d(TAG, "Token registrado correctamente")
+                } else {
+                    Log.d(TAG, "Hubo un problema al registrar el token")
+                }
+            }
+        })
+    }
 
     /**
      * Called when message is received.
