@@ -70,4 +70,6 @@
     <string name="label_phone">Número de teléfono</string>
     <string name="label_address">Dirección</string>
     <string name="btn_save">Guardar cambios</string>
+    <string name="profile_success_message">Los cambios se han guardado correctamente</string>
+    <string name="error_profile_name">El nombre ingresado es demasiado corto</string>
 </resources>

@@ -62,5 +62,37 @@ class ProfileActivity : AppCompatActivity() {
 
         progressBarProfile.visibility = View.GONE
         linearLayoutProfile.visibility = View.VISIBLE
+
+        btnSaveProfile.setOnClickListener {
+            saveProfile()
+        }
+    }
+
+    private fun saveProfile() {
+        val name = etName.text.toString()
+        val phone = etPhone.text.toString()
+        val address = etAddress.text.toString()
+
+        if (name.length < 4) {
+            inputLayoutName.error = getString(R.string.error_profile_name)
+            return
+        }
+
+        val jwt = preferences["jwt", ""]
+        val authHeader = "Bearer $jwt"
+
+        val call = apiService.postUser(authHeader, name, phone, address)
+        call.enqueue(object: Callback<Void> {
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                toast(t.localizedMessage)
+            }
+
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    toast(getString(R.string.profile_success_message))
+                    finish()
+                }
+            }
+        })
     }
 }

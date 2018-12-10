@@ -17,6 +17,15 @@ interface ApiService {
     @Headers("Accept: application/json")
     fun getUser(@Header("Authorization") authHeader: String): Call<User>
 
+    @POST("user")
+    @Headers("Accept: application/json")
+    fun postUser(
+        @Header("Authorization") authHeader: String,
+        @Query("name") name: String,
+        @Query("phone") phone: String,
+        @Query("address") address: String
+    ): Call<Void>
+
     @GET("specialties")
     fun getSpecialties(): Call<ArrayList<Specialty>>
 
