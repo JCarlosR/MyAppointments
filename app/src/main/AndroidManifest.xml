@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools" package="com.programacionymas.myappointments">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.programacionymas.myappointments">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -10,33 +11,38 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme" tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.MainActivity" android:launchMode="singleInstance">
+            android:theme="@style/AppTheme"
+            tools:ignore="GoogleAppIndexingWarning">
+        <activity
+                android:name=".ui.MainActivity"
+                android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.RegisterActivity" android:launchMode="singleInstance">
+        <activity
+                android:name=".ui.RegisterActivity"
+                android:launchMode="singleInstance">
         </activity>
-        <activity android:name=".ui.MenuActivity">
-        </activity>
+        <activity android:name=".ui.MenuActivity" />
         <activity
                 android:name=".ui.CreateAppointmentActivity"
-                android:parentActivityName=".ui.MenuActivity">
-        </activity>
+                android:parentActivityName=".ui.MenuActivity" />
         <activity
                 android:name=".ui.AppointmentsActivity"
-                android:parentActivityName=".ui.MenuActivity">
-        </activity>
+                android:parentActivityName=".ui.MenuActivity" />
 
-        <service
-                android:name=".io.fcm.FCMService">
+        <activity android:name=".ui.ProfileActivity"
+                  android:parentActivityName=".ui.MenuActivity"/>
+
+        <service android:name=".io.fcm.FCMService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
+
     </application>
 
 </manifest>

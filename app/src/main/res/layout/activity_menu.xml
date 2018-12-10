@@ -19,6 +19,14 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:text="@string/label_welcome"/>
 
+    <Button android:id="@+id/btnProfile"
+            android:onClick="editProfile"
+            android:layout_width="match_parent"
+            android:layout_marginTop="12dp"
+            android:drawableStart="@drawable/ic_profile"
+            style="@style/MenuButton"
+            android:text="@string/btn_edit_profile"/>
+
     <Button android:id="@+id/btnCreateAppointment"
             android:layout_width="match_parent"
             android:layout_marginTop="12dp"

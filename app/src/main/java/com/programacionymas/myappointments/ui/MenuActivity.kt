@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import com.google.firebase.iid.FirebaseInstanceId
 import com.programacionymas.myappointments.util.PreferenceHelper
 import com.programacionymas.myappointments.util.PreferenceHelper.set
@@ -47,6 +48,11 @@ class MenuActivity : AppCompatActivity() {
         btnLogout.setOnClickListener {
             performLogout()
         }
+    }
+
+    fun editProfile(view: View) {
+        val intent = Intent(this, ProfileActivity::class.java)
+        startActivity(intent)
     }
 
     private fun storeToken() {
