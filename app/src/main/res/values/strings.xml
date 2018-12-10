@@ -72,4 +72,5 @@
     <string name="btn_save">Guardar cambios</string>
     <string name="profile_success_message">Los cambios se han guardado correctamente</string>
     <string name="error_profile_name">El nombre ingresado es demasiado corto</string>
+    <string name="you_need_a_phone">Es necesario asociar primero un teléfono a tu cuenta</string>
 </resources>
