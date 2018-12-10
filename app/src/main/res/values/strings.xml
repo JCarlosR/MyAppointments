@@ -66,4 +66,8 @@
     <string name="error_register_validation">Ocurrió un error en el registro</string>
     <string name="default_notification_channel_id">default_channel</string>
     <string name="btn_edit_profile">Editar perfil</string>
+    <string name="label_edit_profile">Editar datos básicos</string>
+    <string name="label_phone">Número de teléfono</string>
+    <string name="label_address">Dirección</string>
+    <string name="btn_save">Guardar cambios</string>
 </resources>

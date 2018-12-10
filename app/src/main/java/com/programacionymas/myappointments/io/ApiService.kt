@@ -2,10 +2,7 @@ package com.programacionymas.myappointments.io
 
 import com.programacionymas.myappointments.io.response.LoginResponse
 import com.programacionymas.myappointments.io.response.SimpleResponse
-import com.programacionymas.myappointments.model.Appointment
-import com.programacionymas.myappointments.model.Doctor
-import com.programacionymas.myappointments.model.Schedule
-import com.programacionymas.myappointments.model.Specialty
+import com.programacionymas.myappointments.model.*
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -15,6 +12,10 @@ import retrofit2.http.*
 
 
 interface ApiService {
+
+    @GET("user")
+    @Headers("Accept: application/json")
+    fun getUser(@Header("Authorization") authHeader: String): Call<User>
 
     @GET("specialties")
     fun getSpecialties(): Call<ArrayList<Specialty>>
