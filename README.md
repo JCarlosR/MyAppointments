@@ -6,7 +6,7 @@ Este repositorio forma parte del "Curso intensivo de Laravel y Android", en el q
 
 A continuación puedes ver una presentación en formato de video de lo que aprenderás en el curso.
 
-[![Curso de Laravel y Android](https://udemy-images.udemy.com/course/750x422/1454454_9e89.jpg)](https://www.youtube.com/watch?v=pmpbVqjRYQI)
+[![Curso de Laravel y Android](https://res.cloudinary.com/pym/image/upload/c_scale,f_auto,q_auto,w_420/v1599162695/courses/LaravelAndroid.png)](https://www.youtube.com/watch?v=pmpbVqjRYQI)
 
 ## Contenido
 
