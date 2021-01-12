@@ -2,17 +2,17 @@ package com.programacionymas.myappointments.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.iid.FirebaseInstanceId
-import com.programacionymas.myappointments.util.PreferenceHelper
-import com.programacionymas.myappointments.util.PreferenceHelper.set
-import com.programacionymas.myappointments.util.PreferenceHelper.get
 import com.programacionymas.myappointments.R
 import com.programacionymas.myappointments.io.ApiService
 import com.programacionymas.myappointments.model.User
+import com.programacionymas.myappointments.util.PreferenceHelper
+import com.programacionymas.myappointments.util.PreferenceHelper.get
+import com.programacionymas.myappointments.util.PreferenceHelper.set
 import com.programacionymas.myappointments.util.toast
 import kotlinx.android.synthetic.main.activity_menu.*
 import retrofit2.Call

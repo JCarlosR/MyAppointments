@@ -1,8 +1,8 @@
 package com.programacionymas.myappointments.ui
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.programacionymas.myappointments.R
 import com.programacionymas.myappointments.io.ApiService
 import com.programacionymas.myappointments.model.Appointment
@@ -38,7 +38,9 @@ class AppointmentsActivity : AppCompatActivity() {
 
     private fun loadAppointments() {
         val jwt = preferences["jwt", ""]
+
         val call = apiService.getAppointments("Bearer $jwt")
+
         call.enqueue(object: Callback<ArrayList<Appointment>> {
             override fun onFailure(call: Call<ArrayList<Appointment>>, t: Throwable) {
                 toast(t.localizedMessage)

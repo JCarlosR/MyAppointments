@@ -1,9 +1,8 @@
 package com.programacionymas.myappointments.ui
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.programacionymas.myappointments.R
 import com.programacionymas.myappointments.io.ApiService
 import com.programacionymas.myappointments.model.User
@@ -30,6 +29,7 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
 
         val jwt = preferences["jwt", ""]
+
         val authHeader = "Bearer $jwt"
 
         val call = apiService.getUser(authHeader)

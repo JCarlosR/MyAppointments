@@ -1,11 +1,11 @@
 package com.programacionymas.myappointments.ui
 
-import android.support.transition.AutoTransition
-import android.support.transition.TransitionManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.AutoTransition
+import androidx.transition.TransitionManager
 import com.programacionymas.myappointments.R
 import com.programacionymas.myappointments.model.Appointment
 import kotlinx.android.synthetic.main.item_appointment.view.*

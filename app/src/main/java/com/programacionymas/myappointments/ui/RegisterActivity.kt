@@ -1,8 +1,8 @@
 package com.programacionymas.myappointments.ui
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.programacionymas.myappointments.R
 import com.programacionymas.myappointments.io.ApiService
 import com.programacionymas.myappointments.io.response.LoginResponse

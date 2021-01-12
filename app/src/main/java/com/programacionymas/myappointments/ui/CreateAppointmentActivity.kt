@@ -2,9 +2,6 @@ package com.programacionymas.myappointments.ui
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -12,6 +9,9 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.programacionymas.myappointments.R
 import com.programacionymas.myappointments.io.ApiService
 import com.programacionymas.myappointments.io.response.SimpleResponse
@@ -119,8 +119,6 @@ class CreateAppointmentActivity : AppCompatActivity() {
                 }
             }
         })
-
-
     }
 
     private fun listenDoctorAndDateChanges() {
@@ -195,8 +193,11 @@ class CreateAppointmentActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<ArrayList<Specialty>>, response: Response<ArrayList<Specialty>>) {
                 if (response.isSuccessful) { // [200...300)
-                    val specialties = response.body()
-                    spinnerSpecialties.adapter = ArrayAdapter<Specialty>(this@CreateAppointmentActivity, android.R.layout.simple_list_item_1, specialties)
+                    response.body()?.let {
+                        val specialties = it.toMutableList()
+                        spinnerSpecialties.adapter = ArrayAdapter(this@CreateAppointmentActivity, android.R.layout.simple_list_item_1, specialties)
+                    }
+
                 }
             }
         })
@@ -224,11 +225,12 @@ class CreateAppointmentActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<ArrayList<Doctor>>, response: Response<ArrayList<Doctor>>) {
                 if (response.isSuccessful) { // [200...300)
-                    val doctors = response.body()
-                    spinnerDoctors.adapter = ArrayAdapter<Doctor>(this@CreateAppointmentActivity, android.R.layout.simple_list_item_1, doctors)
+                    response.body()?.let {
+                        val doctors = it.toMutableList()
+                        spinnerDoctors.adapter = ArrayAdapter(this@CreateAppointmentActivity, android.R.layout.simple_list_item_1, doctors)
+                    }
                 }
             }
-
         })
     }
 

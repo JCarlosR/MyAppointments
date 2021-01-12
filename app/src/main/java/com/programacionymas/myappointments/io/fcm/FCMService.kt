@@ -7,8 +7,8 @@ import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
-import android.support.v4.app.NotificationCompat
 import android.util.Log
+import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.programacionymas.myappointments.R
@@ -32,13 +32,11 @@ class FCMService : FirebaseMessagingService() {
         PreferenceHelper.defaultPrefs(this)
     }
 
-    override fun onNewToken(newToken: String?) {
+    override fun onNewToken(newToken: String) {
         super.onNewToken(newToken)
 
-        if (newToken == null)
-            return
-
         val jwt = preferences["jwt", ""]
+
         if (jwt.isEmpty())
             return
 
@@ -135,10 +133,10 @@ class FCMService : FirebaseMessagingService() {
                 "Channel human readable title",
                 NotificationManager.IMPORTANCE_DEFAULT
             )
-            notificationManager!!.createNotificationChannel(channel)
+            notificationManager?.createNotificationChannel(channel)
         }
 
-        notificationManager!!.notify(0 /* ID of notification */, notificationBuilder.build())
+        notificationManager?.notify(0 /* ID of notification */, notificationBuilder.build())
     }
 
     companion object {
