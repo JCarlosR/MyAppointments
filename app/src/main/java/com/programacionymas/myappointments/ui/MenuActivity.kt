@@ -7,6 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import com.programacionymas.myappointments.R
 import com.programacionymas.myappointments.io.ApiService
 import com.programacionymas.myappointments.model.User
@@ -94,24 +95,27 @@ class MenuActivity : AppCompatActivity() {
     }
 
     private fun storeToken() {
-        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener(this) { instanceIdResult ->
-            val deviceToken = instanceIdResult.token
+        val deviceToken = FirebaseMessaging.getInstance().token.result
 
-            val call = apiService.postToken(authHeader, deviceToken)
-            call.enqueue(object: Callback<Void> {
-                override fun onFailure(call: Call<Void>, t: Throwable) {
-                    toast(t.localizedMessage)
-                }
-
-                override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                    if (response.isSuccessful) {
-                        Log.d(TAG, "Token registrado correctamente")
-                    } else {
-                        Log.d(TAG, "Hubo un problema al registrar el token")
-                    }
-                }
-            })
+        if (deviceToken == null) {
+            Log.d(TAG, "We don't store the device token as we got a null value")
+            return
         }
+
+        val call = apiService.postToken(authHeader, deviceToken)
+        call.enqueue(object: Callback<Void> {
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                toast(t.localizedMessage)
+            }
+
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    Log.d(TAG, "Token registrado correctamente")
+                } else {
+                    Log.d(TAG, "Hubo un problema al registrar el token")
+                }
+            }
+        })
     }
 
     private fun performLogout() {
